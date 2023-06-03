@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Club {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  getAllClubs: [Club!]!
+  getClubByID(id: String!): Club!
+}
+
+type Mutation {
+  createClub(club: CreateClubInput!): Club!
+}
+
+input CreateClubInput {
+  name: String!
+}

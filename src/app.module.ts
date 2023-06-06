@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { join } from 'path';
+import { TeamModule } from './team/team.module';
 
 @Module({
   imports: [
@@ -20,13 +21,14 @@ import { join } from 'path';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      include: [ClubModule],
+      include: [ClubModule, SportModule],
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     })
     ,
     SportModule,
     ClubModule,
+    TeamModule,
   ],
 })
 export class AppModule {}

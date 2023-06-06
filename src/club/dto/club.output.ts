@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { IsString } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 @ObjectType()
 export class Club {
@@ -9,5 +9,6 @@ export class Club {
 
   @Field()
   @IsString()
+  @IsNotEmpty()
   name: string;
 }

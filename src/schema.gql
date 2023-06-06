@@ -2,20 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Sport {
+  id: String!
+  name: String!
+}
+
 type Club {
   id: ID!
   name: String!
+  sport: Sport!
 }
 
 type Query {
   getAllClubs: [Club!]!
   getClubByID(id: String!): Club!
+  sportById(id: String!): Sport!
+  sports: [Sport!]!
 }
 
 type Mutation {
-  createClub(club: CreateClubInput!): Club!
+  createClub(club: CreateClubInput!, sportId: String!): Club!
+  createSport(sport: CreateSportInputs!): Sport!
 }
 
 input CreateClubInput {
+  name: String!
+}
+
+input CreateSportInputs {
   name: String!
 }

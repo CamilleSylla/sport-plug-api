@@ -1,13 +1,14 @@
-import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm'
+import { SportEntity } from 'src/sport/sport.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class ClubEntity {
+  @PrimaryGeneratedColumn()
+  id: string;
 
-    @PrimaryGeneratedColumn()
-    id:string;
+  @Column({ nullable: false })
+  name: string;
 
-    @Column()
-    name: string;
-
-
+  @ManyToOne(() => SportEntity, (sport) => sport.clubs)
+  sport: SportEntity;
 }

@@ -29,6 +29,14 @@ export class ClubService {
     return await this.clubRepository.findOne({ where: { id } });
   }
 
+  async getClubTeams(id: string) {
+    const club = await this.clubRepository.findOne({
+      where: { id },
+      relations: ['teams'],
+    });
+    return club.teams;
+  }
+  
   async getClubSports(id: string) {
     const club = await this.clubRepository.findOne({
       where: { id },

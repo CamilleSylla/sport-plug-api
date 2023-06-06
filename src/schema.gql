@@ -10,6 +10,7 @@ type Sport {
 type Club {
   id: ID!
   name: String!
+  teams: [Team!]!
   sport: Sport!
 }
 

@@ -20,6 +20,7 @@ export class ClubResolver {
     @Args('club', { type: () => CreateClubInput }) club: CreateClubInput,
     @Args('sportId', { type: () => String }) sportId: string,
   ) {
+    //@todo clubId should be extract from inside the user token guard
     return await this.clubService.create({ club, sportId });
   }
 

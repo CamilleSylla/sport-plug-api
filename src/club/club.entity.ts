@@ -1,5 +1,6 @@
 import { SportEntity } from 'src/sport/sport.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { TeamEntity } from 'src/team/team.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class ClubEntity {
@@ -11,4 +12,7 @@ export class ClubEntity {
 
   @ManyToOne(() => SportEntity, (sport) => sport.clubs)
   sport: SportEntity;
+
+  @OneToMany(() => TeamEntity, team => team.club)
+  teams: ClubEntity[]
 }

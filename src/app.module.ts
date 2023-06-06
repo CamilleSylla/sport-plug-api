@@ -21,7 +21,7 @@ import { TeamModule } from './team/team.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      include: [ClubModule, SportModule],
+      include: [ClubModule, SportModule, TeamModule],
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     })

@@ -9,6 +9,7 @@ import { SportEntity } from 'src/sport/sport.entity';
 
 @Module({
   imports : [TypeOrmModule.forFeature([ClubEntity, SportEntity]), forwardRef(() => SportModule)],
-  providers: [ClubResolver, ClubService, SportService ]
+  providers: [ClubResolver, ClubService, SportService ],
+  exports: [ClubService]
 })
 export class ClubModule {}

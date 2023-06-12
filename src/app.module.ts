@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { join } from 'path';
 import { TeamModule } from './team/team.module';
+import { CategorieModule } from './categorie/categorie.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { TeamModule } from './team/team.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      include: [ClubModule, SportModule, TeamModule],
+      include: [ClubModule, SportModule, TeamModule, CategorieModule],
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     })
@@ -29,6 +30,7 @@ import { TeamModule } from './team/team.module';
     SportModule,
     ClubModule,
     TeamModule,
+    CategorieModule,
   ],
 })
 export class AppModule {}

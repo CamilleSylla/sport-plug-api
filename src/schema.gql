@@ -5,6 +5,20 @@
 type Sport {
   id: String!
   name: String!
+  categories: [Categorie!]!
+}
+
+type Team {
+  id: String!
+  name: String!
+  club: Club!
+}
+
+type Categorie {
+  id: String!
+  name: String!
+  teams: [Team!]!
+  sport: Sport!
 }
 
 type Club {
@@ -14,16 +28,11 @@ type Club {
   sport: Sport!
 }
 
-type Team {
-  id: String!
-  name: String!
-  club: Club!
-}
-
 type Query {
   getTeamByID(id: String!): Team!
   sportById(id: String!): Sport!
   sports: [Sport!]!
+  categories: [Categorie!]!
   getAllClubs: [Club!]!
   getClubByID(id: String!): Club!
 }
@@ -31,6 +40,7 @@ type Query {
 type Mutation {
   createTeam(team: CreateTeamInputs!, clubId: String!): Team!
   createSport(sport: CreateSportInputs!): Sport!
+  createCategorie(categorie: CreateCategorieInputs!): Categorie!
   createClub(club: CreateClubInput!, sportId: String!): Club!
 }
 
@@ -40,6 +50,11 @@ input CreateTeamInputs {
 
 input CreateSportInputs {
   name: String!
+}
+
+input CreateCategorieInputs {
+  name: String!
+  sportId: String!
 }
 
 input CreateClubInput {

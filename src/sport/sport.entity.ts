@@ -1,3 +1,4 @@
+import { CategorieEntity } from 'src/categorie/categorie.entity';
 import { ClubEntity } from 'src/club/club.entity';
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm'
 
@@ -11,5 +12,8 @@ export class SportEntity {
 
     @OneToMany(() => ClubEntity, club => club.sport)
     clubs: ClubEntity[]
+    
+    @OneToMany(() => CategorieEntity, categorie => categorie.sport)
+    categories: ClubEntity[]
 
 }

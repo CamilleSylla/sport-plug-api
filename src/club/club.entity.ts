@@ -14,5 +14,5 @@ export class ClubEntity {
   sport: SportEntity;
 
   @OneToMany(() => TeamEntity, team => team.club)
-  teams: ClubEntity[]
+  teams: TeamEntity[]
 }

@@ -1,3 +1,4 @@
+import { CategorieEntity } from 'src/categorie/categorie.entity';
 import { ClubEntity } from 'src/club/club.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
@@ -11,4 +12,7 @@ export class TeamEntity {
 
   @ManyToOne(() => ClubEntity, (club) => club.teams)
   club: ClubEntity;
+
+  @ManyToOne(() => CategorieEntity, (categorie) => categorie.teams)
+  categorie: CategorieEntity;
 }

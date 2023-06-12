@@ -5,6 +5,7 @@ import { CreateTeamInputs } from './dto/create-team-inputs';
 import { Club } from 'src/club/dto/club.output';
 import { Categorie } from 'src/categorie/dto/categorie.outputs';
 import { Sport } from 'src/sport/dto/sport.outputs';
+import { Competition } from 'src/competition/dto/competition.outpouts';
 
 @Resolver(() => Team)
 export class TeamResolver {
@@ -37,5 +38,10 @@ export class TeamResolver {
   @ResolveField(() => Sport, { name: 'sport' })
   async sport(@Parent() team: Team) {
     return await this.teamService.getTeamSport(team.id);
+  }
+
+  @ResolveField(() => Competition , { name: 'competition' })
+  async competition(@Parent() team: Team) {
+    return await this.teamService.competition(team.id);
   }
 }

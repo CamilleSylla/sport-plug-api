@@ -7,6 +7,7 @@ import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { join } from 'path';
 import { TeamModule } from './team/team.module';
 import { CategorieModule } from './categorie/categorie.module';
+import { CompetitionModule } from './competition/competition.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { CategorieModule } from './categorie/categorie.module';
     ClubModule,
     TeamModule,
     CategorieModule,
+    CompetitionModule,
   ],
 })
 export class AppModule {}

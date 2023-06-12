@@ -2,14 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Sport {
-  id: String!
-  name: String!
-  categories: [Categorie!]!
-  club: [Club!]!
-  team: [Team!]!
-}
-
 type Club {
   id: ID!
   name: String!
@@ -17,11 +9,21 @@ type Club {
   sport: Sport!
 }
 
+type Competition {
+  id: String!
+  name: String!
+  sport: Sport!
+  teams: [Team!]!
+  categories: Categorie!
+  categorie: Categorie!
+}
+
 type Team {
   id: String!
   name: String!
   club: Club!
   categorie: Categorie!
+  competition: Competition!
   sport: Sport!
 }
 
@@ -32,8 +34,21 @@ type Categorie {
   sport: Sport!
 }
 
+type Sport {
+  id: String!
+  name: String!
+  clubs: [Club!]!
+  categories: [Categorie!]!
+  teams: [Team!]!
+  competitions: [Competition!]!
+  club: [Club!]!
+  team: [Team!]!
+}
+
 type Query {
   getTeamByID(id: String!): Team!
+  competitions: [Competition!]!
+  competitionsBySport(sportId: String!): [Competition!]!
   categories: [Categorie!]!
   sportById(id: String!): Sport!
   sports: [Sport!]!
@@ -43,6 +58,7 @@ type Query {
 
 type Mutation {
   createTeam(team: CreateTeamInputs!): Team!
+  createCompetition(competition: CreateCompetitionInputs!): Competition!
   createCategorie(categorie: CreateCategorieInputs!): Categorie!
   createSport(sport: CreateSportInputs!): Sport!
   createClub(club: CreateClubInput!, sportId: String!): Club!
@@ -52,6 +68,13 @@ input CreateTeamInputs {
   name: String!
   categorieId: String!
   clubId: String!
+  competitionId: String!
+}
+
+input CreateCompetitionInputs {
+  name: String!
+  sportId: String!
+  categorieId: String!
 }
 
 input CreateCategorieInputs {

@@ -1,3 +1,4 @@
+import { CompetitionEntity } from 'src/competition/competition.entity';
 import { SportEntity } from 'src/sport/sport.entity';
 import { TeamEntity } from 'src/team/team.entity';
 import {
@@ -23,4 +24,9 @@ export class CategorieEntity {
     nullable: false,
   })
   sport: SportEntity;
+
+  @OneToMany(() => CompetitionEntity, (competition) => competition.categorie, {
+    nullable: false,
+  })
+  competitions: CompetitionEntity[];
 }

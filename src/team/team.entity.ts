@@ -1,5 +1,6 @@
 import { CategorieEntity } from 'src/categorie/categorie.entity';
 import { ClubEntity } from 'src/club/club.entity';
+import { CompetitionEntity } from 'src/competition/competition.entity';
 import { SportEntity } from 'src/sport/sport.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
@@ -19,4 +20,7 @@ export class TeamEntity {
 
   @ManyToOne(() => CategorieEntity, (categorie) => categorie.teams)
   categorie: CategorieEntity;
+
+  @ManyToOne(() => CompetitionEntity, (competition) => competition.teams)
+  competition: CompetitionEntity;
 }

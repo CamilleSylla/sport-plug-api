@@ -17,4 +17,9 @@ export class CreateTeamInputs extends PickType(
   @IsString()
   @IsNotEmpty()
   clubId: string;
+
+  @Field(() => String)
+  @IsString()
+  @IsNotEmpty()
+  competitionId: string;
 }

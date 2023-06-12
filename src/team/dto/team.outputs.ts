@@ -2,6 +2,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { IsString, IsNotEmpty } from 'class-validator';
 import { Categorie } from 'src/categorie/dto/categorie.outputs';
 import { Club } from 'src/club/dto/club.output';
+import { Competition } from 'src/competition/dto/competition.outpouts';
 
 @ObjectType()
 export class Team {
@@ -19,4 +20,7 @@ export class Team {
 
   @Field(() => Categorie)
   categorie: Categorie;
+
+  @Field(() => Competition)
+  competition: Competition;
 }

@@ -26,7 +26,7 @@ export class ClubService {
     return await this.clubRepository.find();
   }
   async findById(id: string) {
-    return await this.clubRepository.findOne({ where: { id } });
+    return await this.clubRepository.findOne({ where: { id }, relations : ['sport'] });
   }
 
   async getClubTeams(id: string) {

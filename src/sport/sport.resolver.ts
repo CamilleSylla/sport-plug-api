@@ -4,6 +4,8 @@ import { CreateSportInputs } from './dto/create-sport-inputs';
 import { Sport } from './dto/sport.outputs';
 import { Categorie } from 'src/categorie/dto/categorie.outputs';
 import { ModuleRef } from '@nestjs/core';
+import { Team } from 'src/team/dto/team.outputs';
+import { Club } from 'src/club/dto/club.output';
 
 
 @Resolver(() => Sport)
@@ -32,5 +34,14 @@ export class SportResolver  {
     return await this.sportService.categorie(sport.id);
   }
 
+  @ResolveField(() => [Club], { name: 'club' })
+  async club(@Parent() sport: Sport) {
+    return await this.sportService.club(sport.id);
+  }
+
+  @ResolveField(() => [Team], { name: 'team' })
+  async team(@Parent() sport: Sport) {
+    return await this.sportService.team(sport.id);
+  }
 
 }

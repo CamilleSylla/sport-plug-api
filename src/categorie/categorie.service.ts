@@ -31,7 +31,7 @@ export class CategorieService {
   }
 
   async findByID(id: string) {
-    return await this.sportService.findById(id);
+    return await this.categorieRepository.findOne({ where: { id } });
   }
 
   async findAll() {
@@ -44,5 +44,13 @@ export class CategorieService {
       relations: ['sport'],
     });
     return categorie.sport;
+  }
+
+  async team(id: string) {
+    const categorie = await this.categorieRepository.findOne({
+      where: { id },
+      relations: ['teams'],
+    });
+    return categorie.teams;
   }
 }

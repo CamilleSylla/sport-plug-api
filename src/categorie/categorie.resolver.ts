@@ -3,6 +3,7 @@ import { Categorie } from './dto/categorie.outputs';
 import { CreateCategorieInputs } from './dto/create-categorie.inputs';
 import { CategorieService } from './categorie.service';
 import { Sport } from 'src/sport/dto/sport.outputs';
+import { Team } from 'src/team/dto/team.outputs';
 
 @Resolver(() => Categorie)
 export class CategorieResolver  {
@@ -24,5 +25,10 @@ export class CategorieResolver  {
   @ResolveField(() => Sport, { name: 'sport' })
   async sport(@Parent() categorie: Categorie) {
     return await this.categorieService.sport(categorie.id);
+  }
+
+  @ResolveField(() => [Team], { name: 'teams' })
+  async teams(@Parent() categorie: Categorie) {
+    return await this.categorieService.team(categorie.id);
   }
 }

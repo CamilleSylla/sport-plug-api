@@ -8,11 +8,13 @@ import { ClubService } from 'src/club/club.service';
 import { ClubEntity } from 'src/club/club.entity';
 import { SportEntity } from 'src/sport/sport.entity';
 import { SportModule } from 'src/sport/sport.module';
+import { CategorieModule } from 'src/categorie/categorie.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([TeamEntity, ClubEntity, SportEntity]),
     forwardRef(() => ClubModule),
     forwardRef(() => SportModule),
+    forwardRef(() => CategorieModule)
   ],
   providers: [TeamService, TeamResolver, ClubService],
 })

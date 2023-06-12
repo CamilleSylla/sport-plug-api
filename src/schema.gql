@@ -6,19 +6,8 @@ type Sport {
   id: String!
   name: String!
   categories: [Categorie!]!
-}
-
-type Team {
-  id: String!
-  name: String!
-  club: Club!
-}
-
-type Categorie {
-  id: String!
-  name: String!
-  teams: [Team!]!
-  sport: Sport!
+  club: [Club!]!
+  team: [Team!]!
 }
 
 type Club {
@@ -28,33 +17,50 @@ type Club {
   sport: Sport!
 }
 
+type Team {
+  id: String!
+  name: String!
+  club: Club!
+  categorie: Categorie!
+  sport: Sport!
+}
+
+type Categorie {
+  id: String!
+  name: String!
+  teams: [Team!]!
+  sport: Sport!
+}
+
 type Query {
   getTeamByID(id: String!): Team!
+  categories: [Categorie!]!
   sportById(id: String!): Sport!
   sports: [Sport!]!
-  categories: [Categorie!]!
   getAllClubs: [Club!]!
   getClubByID(id: String!): Club!
 }
 
 type Mutation {
-  createTeam(team: CreateTeamInputs!, clubId: String!): Team!
-  createSport(sport: CreateSportInputs!): Sport!
+  createTeam(team: CreateTeamInputs!): Team!
   createCategorie(categorie: CreateCategorieInputs!): Categorie!
+  createSport(sport: CreateSportInputs!): Sport!
   createClub(club: CreateClubInput!, sportId: String!): Club!
 }
 
 input CreateTeamInputs {
   name: String!
-}
-
-input CreateSportInputs {
-  name: String!
+  categorieId: String!
+  clubId: String!
 }
 
 input CreateCategorieInputs {
   name: String!
   sportId: String!
+}
+
+input CreateSportInputs {
+  name: String!
 }
 
 input CreateClubInput {

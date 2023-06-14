@@ -1,5 +1,6 @@
 import { SportEntity } from 'src/sport/sport.entity';
 import { TeamEntity } from 'src/team/team.entity';
+import { UserEntity } from 'src/users/users.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
@@ -15,4 +16,7 @@ export class ClubEntity {
 
   @OneToMany(() => TeamEntity, team => team.club)
   teams: TeamEntity[]
+
+  @OneToMany(() => UserEntity, user => user.club)
+  users: UserEntity[]
 }

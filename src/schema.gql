@@ -45,7 +45,26 @@ type Sport {
   team: [Team!]!
 }
 
+type User {
+  id: String!
+  firstname: String!
+  lastname: String!
+  email: String!
+  password: String!
+  club: Club!
+}
+
+type SignIn {
+  id: String!
+  firstname: String!
+  lastname: String!
+  email: String!
+  club: Club!
+  accessToken: String!
+}
+
 type Query {
+  findOne(id: String!): User!
   getTeamByID(id: String!): Team!
   competitions: [Competition!]!
   competitionsBySport(sportId: String!): [Competition!]!
@@ -57,11 +76,20 @@ type Query {
 }
 
 type Mutation {
+  signIn(email: String!, password: String!): SignIn!
+  createUser(user: CreateUserInput!): SignIn!
   createTeam(team: CreateTeamInputs!): Team!
   createCompetition(competition: CreateCompetitionInputs!): Competition!
   createCategorie(categorie: CreateCategorieInputs!): Categorie!
   createSport(sport: CreateSportInputs!): Sport!
   createClub(club: CreateClubInput!, sportId: String!): Club!
+}
+
+input CreateUserInput {
+  firstname: String!
+  lastname: String!
+  email: String!
+  password: String!
 }
 
 input CreateTeamInputs {

@@ -8,6 +8,9 @@ import { join } from 'path';
 import { TeamModule } from './team/team.module';
 import { CategorieModule } from './categorie/categorie.module';
 import { CompetitionModule } from './competition/competition.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -23,16 +26,30 @@ import { CompetitionModule } from './competition/competition.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      include: [ClubModule, SportModule, TeamModule, CategorieModule],
+      include: [
+        ClubModule,
+        SportModule,
+        TeamModule,
+        CategorieModule,
+        CompetitionModule,
+        UsersModule,
+        AuthModule
+      ],
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    })
-    ,
+    }),
+    JwtModule.register({
+      global: true,
+      secret: "changeit",
+      signOptions: { expiresIn: '60s' },
+    }),
     SportModule,
     ClubModule,
     TeamModule,
     CategorieModule,
     CompetitionModule,
+    UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

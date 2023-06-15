@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { Club } from "src/club/dto/club.output";
 
 @ObjectType()
@@ -28,6 +28,11 @@ export class User {
     @IsString()
     @IsNotEmpty()
     password: string;
+
+    @Field()
+    @IsString()
+    @IsOptional()
+    refreshToken?: string;
 
     @Field(() => Club)
     club: Club;

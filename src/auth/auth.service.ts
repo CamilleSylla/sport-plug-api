@@ -15,17 +15,21 @@ export class AuthService {
     const user = await this.usersService.findByEmail(email);
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      const { password, ...payload } = user;
+      const { password, refreshToken : rf, ...payload } = user;
       const accessToken = this.jwtService.sign(payload);
-      return plainToInstance(SignIn, { ...user, accessToken });
+      const refreshToken = this.jwtService.sign(payload, {
+        expiresIn: '7d',
+      })
+      await this.usersService.updateOneRefreshToken(user.id,  refreshToken );
+      return plainToInstance(SignIn, { ...user, accessToken, refreshToken });
     }
     throw new BadRequestException('Invalid email or password');
   }
 
   async me(email: string) {
-    const { password, ...user} = await this.usersService.findByEmail(email);
+    const { password, refreshToken, ...user} = await this.usersService.findByEmail(email);
     const accessToken = this.jwtService.sign(user);
-    return plainToInstance(SignIn, { ...user, accessToken });
+    return plainToInstance(SignIn, { ...user, accessToken, refreshToken });
   }
 
   async validate(jwt : string){
@@ -34,5 +38,12 @@ export class AuthService {
       return user;
     }
     throw new UnauthorizedException()
+  }
+
+  async refreshToken(refreshToken: string){
+     const refreshUser = await this.jwtService.verify(refreshToken);
+     if (refreshUser) {
+       return await this.me(refreshUser.email);
+     }
   }
 }

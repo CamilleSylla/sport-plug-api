@@ -22,4 +22,9 @@ export class AuthResolver {
         return signIn;
         
     }
+
+    @Mutation(() => SignIn)
+    async refreshToken(@Args('refreshToken') refreshToken: string) {
+        return this.authService.refreshToken(refreshToken);
+    }
 }

@@ -51,6 +51,7 @@ type User {
   lastname: String!
   email: String!
   password: String!
+  refreshToken: String!
   club: Club!
 }
 
@@ -59,6 +60,7 @@ type SignIn {
   firstname: String!
   lastname: String!
   email: String!
+  refreshToken: String!
   club: Club!
   accessToken: String!
 }
@@ -78,6 +80,7 @@ type Query {
 }
 
 type Mutation {
+  refreshToken(refreshToken: String!): SignIn!
   createUser(user: CreateUserInput!): SignIn!
   createTeam(team: CreateTeamInputs!): Team!
   createCompetition(competition: CreateCompetitionInputs!): Competition!

@@ -22,10 +22,15 @@ export class UsersService {
       ...inputs,
       password: await bcrypt.hash(password, 10),
     });
+
     const newUser = this.userRepository.create(user);
-    const {password:_, ...payload} = await this.userRepository.save(newUser);
+    const { password: _, ...payload } = await this.userRepository.save(newUser);
     const accessToken = this.jwtService.sign(payload);
-    return plainToInstance(SignIn, { ...payload, accessToken });
+    const refreshToken = this.jwtService.sign(payload, {
+      expiresIn: '7d',
+    });
+    await this.userRepository.update(newUser.id, { refreshToken });
+    return plainToInstance(SignIn, { ...payload, accessToken, refreshToken });
   }
 
   async findOne(id: string) {
@@ -34,5 +39,9 @@ export class UsersService {
 
   async findByEmail(email: string) {
     return this.userRepository.findOne({ where: { email } });
+  }
+
+  async updateOneRefreshToken(id: string, refreshToken: string) {
+    return this.userRepository.update(id, { refreshToken });
   }
 }

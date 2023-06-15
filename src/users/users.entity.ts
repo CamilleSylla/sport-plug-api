@@ -1,33 +1,43 @@
-import { ClubEntity } from "src/club/club.entity";
-import { TeamEntity } from "src/team/team.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ClubEntity } from 'src/club/club.entity';
+import { TeamEntity } from 'src/team/team.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class UserEntity {
-    @PrimaryGeneratedColumn()
-    id: string;
+  @PrimaryGeneratedColumn()
+  id: string;
 
-    @Column({nullable:false})
-    firstname: string;
+  @Column({ nullable: false })
+  firstname: string;
 
-    @Column({nullable:false})
-    lastname: string;
+  @Column({ nullable: false })
+  lastname: string;
 
-    @Column({unique: true, nullable: false})
-    email: string;
+  @Column({ unique: true, nullable: false })
+  email: string;
 
-    @Column({nullable:false})
-    password: string;
+  @Column({ nullable: false })
+  password: string;
 
-    @ManyToOne(() => ClubEntity, (club) => club.users)
-    club: ClubEntity;
+  @Column({ nullable: true })
+  refreshToken?: string;
 
-    @ManyToOne(() => TeamEntity, (team) => team.users)
-    team: TeamEntity;
+  @ManyToOne(() => ClubEntity, (club) => club.users)
+  club: ClubEntity;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @ManyToOne(() => TeamEntity, (team) => team.users)
+  team: TeamEntity;
 
-    @UpdateDateColumn()
-    updatedDate: Date
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
 }

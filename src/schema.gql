@@ -64,6 +64,8 @@ type SignIn {
 }
 
 type Query {
+  signIn(email: String!, password: String!): SignIn!
+  me: SignIn!
   findOne(id: String!): User!
   getTeamByID(id: String!): Team!
   competitions: [Competition!]!
@@ -76,7 +78,6 @@ type Query {
 }
 
 type Mutation {
-  signIn(email: String!, password: String!): SignIn!
   createUser(user: CreateUserInput!): SignIn!
   createTeam(team: CreateTeamInputs!): Team!
   createCompetition(competition: CreateCompetitionInputs!): Competition!

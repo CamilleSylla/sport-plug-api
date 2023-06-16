@@ -30,8 +30,8 @@ export class User {
     password: string;
 
     @Field()
-    @IsString()
     @IsOptional()
+    @IsString()
     refreshToken?: string;
 
     @Field(() => Club)

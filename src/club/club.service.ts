@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SportService } from 'src/sport/sport.service';
 import { plainToInstance } from 'class-transformer';
-import { User } from 'src/users/dto/users.outputs';
 import { UserEntity } from 'src/users/users.entity';
 
 @Injectable()
@@ -23,6 +22,7 @@ export class ClubService {
     const entity = plainToInstance(ClubEntity, {
       ...clubInstance,
       sport,
+      users: [user],
       kams: [user],
       createdBy: user.email,
     });

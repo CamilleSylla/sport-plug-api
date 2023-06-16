@@ -41,6 +41,10 @@ export class ClubEntity {
     onDelete: 'SET NULL',
   })
   kams: UserEntity[];
+  @OneToMany(() => UserEntity, (user) => user.club, {
+    onDelete: 'SET NULL',
+  })
+  users: UserEntity[];
 
   @ManyToOne(() => SportEntity, (sport) => sport.clubs, { cascade: true })
   sport: SportEntity;

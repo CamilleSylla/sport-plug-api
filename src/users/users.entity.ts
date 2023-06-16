@@ -35,6 +35,9 @@ export class UserEntity {
   @ManyToOne(() => ClubEntity, (club) => club.kams, { onDelete: 'SET NULL' })
   superadmin: ClubEntity;
 
+  @ManyToOne(() => ClubEntity, (club) => club.users, { onDelete: 'SET NULL' })
+  club: ClubEntity;
+
   @CreateDateColumn()
   createdAt: Date;
 

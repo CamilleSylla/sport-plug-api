@@ -65,6 +65,7 @@ type User {
   password: String!
   refreshToken: String!
   club: Club!
+  findByEmail: Club!
 }
 
 type SignIn {

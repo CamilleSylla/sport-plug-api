@@ -5,6 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SportService } from 'src/sport/sport.service';
 import { plainToInstance } from 'class-transformer';
+import { User } from 'src/users/dto/users.outputs';
+import { UserEntity } from 'src/users/users.entity';
 
 @Injectable()
 export class ClubService {
@@ -14,11 +16,16 @@ export class ClubService {
     private readonly sportService: SportService,
   ) {}
 
-  async create(data: { club: CreateClubInput; sportId: string }) {
-    const club = this.clubRepository.create(data.club);
-    const sport = await this.sportService.findById(data.sportId);
+  async create(club: CreateClubInput, sportId: string, user: UserEntity) {
+    const clubInstance = this.clubRepository.create(club);
+    const sport = await this.sportService.findById(sportId);
     if (!sport) throw new BadRequestException('Sport not found');
-    const entity = plainToInstance(ClubEntity, { ...club, sport });
+    const entity = plainToInstance(ClubEntity, {
+      ...clubInstance,
+      sport,
+      kams: [user],
+      createdBy: user.email,
+    });
     return this.clubRepository.save(entity);
   }
 
@@ -26,7 +33,14 @@ export class ClubService {
     return await this.clubRepository.find();
   }
   async findById(id: string) {
-    return await this.clubRepository.findOne({ where: { id }, relations : ['sport'] });
+    return await this.clubRepository.findOne({
+      where: { id },
+      relations: ['sport'],
+    });
+  }
+
+  async delete (id: string) {
+    return await this.clubRepository.delete(id);
   }
 
   async getClubTeams(id: string) {
@@ -36,7 +50,7 @@ export class ClubService {
     });
     return club.teams;
   }
-  
+
   async getClubSports(id: string) {
     const club = await this.clubRepository.findOne({
       where: { id },

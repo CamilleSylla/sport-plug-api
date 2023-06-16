@@ -29,11 +29,11 @@ export class UserEntity {
   @Column({ nullable: true })
   refreshToken?: string;
 
-  @ManyToOne(() => ClubEntity, (club) => club.users)
-  club: ClubEntity;
-
   @ManyToOne(() => TeamEntity, (team) => team.users)
   team: TeamEntity;
+
+  @ManyToOne(() => ClubEntity, (club) => club.kams, { onDelete: 'SET NULL' })
+  superadmin: ClubEntity;
 
   @CreateDateColumn()
   createdAt: Date;

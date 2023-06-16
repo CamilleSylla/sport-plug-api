@@ -14,7 +14,7 @@ import { CompetitionModule } from 'src/competition/competition.module';
     TypeOrmModule.forFeature([ClubEntity, SportEntity]),
     forwardRef(() => SportModule),
     forwardRef(() => CategorieModule),
-    forwardRef(() => CompetitionModule)
+    forwardRef(() => CompetitionModule),
   ],
   providers: [ClubResolver, ClubService, SportService],
   exports: [ClubService],

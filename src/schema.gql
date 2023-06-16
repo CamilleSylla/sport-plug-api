@@ -5,9 +5,21 @@
 type Club {
   id: ID!
   name: String!
-  teams: [Team!]!
+  adress: String!
+  city: String!
+  zip: String!
+  email: String!
+  phone: String!
+  createdBy: String!
+  updatedAt: DateTime!
   sport: Sport!
+  teams: [Team!]!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Competition {
   id: String!
@@ -87,6 +99,7 @@ type Mutation {
   createCategorie(categorie: CreateCategorieInputs!): Categorie!
   createSport(sport: CreateSportInputs!): Sport!
   createClub(club: CreateClubInput!, sportId: String!): Club!
+  deleteClub(id: String!): Club!
 }
 
 input CreateUserInput {
@@ -120,4 +133,9 @@ input CreateSportInputs {
 
 input CreateClubInput {
   name: String!
+  adress: String!
+  city: String!
+  zip: String!
+  email: String!
+  phone: String!
 }

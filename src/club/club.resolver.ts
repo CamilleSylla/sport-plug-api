@@ -11,18 +11,31 @@ import { ClubService } from './club.service';
 import { CreateClubInput } from './dto/create-club-input';
 import { Sport } from 'src/sport/dto/sport.outputs';
 import { Team } from 'src/team/dto/team.outputs';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/gql.guard';
+import { CurrentUser } from 'src/users/user.decorator';
+import { UserEntity } from 'src/users/users.entity';
 
 @Resolver(() => Club)
 export class ClubResolver {
   constructor(private readonly clubService: ClubService) {}
 
   @Mutation(() => Club)
+  @UseGuards(GqlAuthGuard)
   async createClub(
     @Args('club', { type: () => CreateClubInput }) club: CreateClubInput,
     @Args('sportId', { type: () => String }) sportId: string,
+    @CurrentUser() user: UserEntity,
   ) {
     //@todo clubId should be extract from inside the user token guard
-    return await this.clubService.create({ club, sportId });
+    return await this.clubService.create(club, sportId, user );
+  }
+
+  @Mutation(() => Club)
+  @UseGuards(GqlAuthGuard)
+  async deleteClub(@Args('id', { type: () => String }) id: string) {
+    //Add more checks
+    return await this.clubService.delete(id);  
   }
 
   @Query(() => [Club], { name: 'getAllClubs' })

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { CreateClubInput } from './dto/create-club-input';
 import { ClubEntity } from './club.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,6 +13,7 @@ import { UserEntity } from 'src/users/users.entity';
 
 @Injectable()
 export class ClubService {
+  private readonly logger = new Logger(ClubService.name);
   constructor(
     @InjectRepository(ClubEntity)
     private readonly clubRepository: Repository<ClubEntity>,
@@ -39,7 +44,7 @@ export class ClubService {
     });
   }
 
-  async delete (id: string) {
+  async delete(id: string) {
     return await this.clubRepository.delete(id);
   }
 
@@ -57,5 +62,13 @@ export class ClubService {
       relations: ['sport'],
     });
     return club.sport;
+  }
+
+  async findByUserId( userId: string) {
+    const club = await this.clubRepository.findOne({
+      where: { users: { id: userId } },
+    });
+    this.logger.log(`user ${userId} is browsing as admin for club ${club.id} ${club.name}`);
+    return club;
   }
 }

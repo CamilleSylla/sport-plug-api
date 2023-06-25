@@ -9,6 +9,7 @@ import {
   OneToMany,
   OneToOne,
   ManyToMany,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -37,10 +38,14 @@ export class ClubEntity {
   @Column({ nullable: false })
   createdBy: string;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
   @OneToMany(() => UserEntity, (user) => user.superadmin, {
     onDelete: 'SET NULL',
   })
   kams: UserEntity[];
+  
   @OneToMany(() => UserEntity, (user) => user.club, {
     onDelete: 'SET NULL',
   })

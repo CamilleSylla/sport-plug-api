@@ -52,9 +52,6 @@ export class Club {
   @Field(() => Sport)
   sport: Sport;
 
-  @CreateDateColumn()
+  @Field(() => Date)
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedDate: Date;
 }

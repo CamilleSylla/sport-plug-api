@@ -13,6 +13,7 @@ type Club {
   createdBy: String!
   updatedAt: DateTime!
   sport: Sport!
+  createdAt: DateTime!
   teams: [Team!]!
 }
 
@@ -90,6 +91,7 @@ type Query {
   sports: [Sport!]!
   getAllClubs: [Club!]!
   getClubByID(id: String!): Club!
+  findByUserId: Club!
 }
 
 type Mutation {

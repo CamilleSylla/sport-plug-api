@@ -75,8 +75,8 @@ type SignIn {
   lastname: String!
   email: String!
   refreshToken: String!
-  club: Club!
   accessToken: String!
+  club: Club!
 }
 
 type Query {

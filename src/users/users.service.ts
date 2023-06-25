@@ -44,4 +44,12 @@ export class UsersService {
   async updateOneRefreshToken(id: string, refreshToken: string) {
     return this.userRepository.update(id, { refreshToken });
   }
+
+  async getUserClub(id: string) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['club'],
+    });
+    return user.club;
+  }
 }

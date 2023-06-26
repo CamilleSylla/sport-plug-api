@@ -11,9 +11,14 @@ import { CompetitionModule } from './competition/competition.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MediaModule } from './media/media.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -33,14 +38,14 @@ import { JwtModule } from '@nestjs/jwt';
         CategorieModule,
         CompetitionModule,
         UsersModule,
-        AuthModule
+        AuthModule,
       ],
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     JwtModule.register({
       global: true,
-      secret: "changeit",
+      secret: 'changeit',
       signOptions: { expiresIn: '1d' },
     }),
     SportModule,
@@ -50,6 +55,7 @@ import { JwtModule } from '@nestjs/jwt';
     CompetitionModule,
     UsersModule,
     AuthModule,
+    MediaModule,
   ],
 })
 export class AppModule {}

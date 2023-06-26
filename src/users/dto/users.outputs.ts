@@ -35,5 +35,6 @@ export class User {
     refreshToken?: string;
 
     @Field(() => Club)
+    @IsOptional()
     club: Club;
 }

@@ -7,6 +7,7 @@ import { plainToInstance } from 'class-transformer';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { SignIn } from './dto/signin-outputs';
+import { MediaService } from 'src/media/media.service';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,7 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private readonly jwtService: JwtService,
+    private readonly mediaService: MediaService
   ) {}
 
   async createOne(inputs: CreateUserInput) {

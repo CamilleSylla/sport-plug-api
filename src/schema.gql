@@ -12,6 +12,7 @@ type Club {
   phone: String!
   createdBy: String!
   updatedAt: DateTime!
+  logo: String!
   sport: Sport!
   createdAt: DateTime!
   teams: [Team!]!

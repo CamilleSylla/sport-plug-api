@@ -38,6 +38,9 @@ export class ClubEntity {
   @Column({ nullable: false })
   createdBy: string;
 
+  @Column({ nullable: true })
+  logo?: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

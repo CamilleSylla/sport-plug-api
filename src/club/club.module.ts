@@ -8,6 +8,7 @@ import { SportService } from 'src/sport/sport.service';
 import { SportEntity } from 'src/sport/sport.entity';
 import { CategorieModule } from 'src/categorie/categorie.module';
 import { CompetitionModule } from 'src/competition/competition.module';
+import { MediaModule } from 'src/media/media.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { CompetitionModule } from 'src/competition/competition.module';
     forwardRef(() => SportModule),
     forwardRef(() => CategorieModule),
     forwardRef(() => CompetitionModule),
+    forwardRef(() => MediaModule)
   ],
   providers: [ClubResolver, ClubService, SportService],
   exports: [ClubService],

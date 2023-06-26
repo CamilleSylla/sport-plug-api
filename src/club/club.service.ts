@@ -64,6 +64,10 @@ export class ClubService {
     return club.sport;
   }
 
+  async addClubLogo(id: string, logo: string) {
+    
+  }
+
   async findByUserId( userId: string) {
     const club = await this.clubRepository.findOne({
       where: { users: { id: userId } },

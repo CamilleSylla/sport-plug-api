@@ -38,6 +38,11 @@ export class Club {
   @IsString()
   @IsOptional()
   phone?: string;
+  
+  @Field()
+  @IsOptional()
+  @IsString()
+  logo?: string;
 
   @Field()
   @IsString()
@@ -49,10 +54,6 @@ export class Club {
   @IsNotEmpty()
   updatedAt: Date;
 
-  @Field()
-  @IsOptional()
-  @IsString()
-  logo?: string;
 
   @Field(() => Sport)
   sport: Sport;

@@ -10,6 +10,8 @@ import {
   OneToOne,
   ManyToMany,
   CreateDateColumn,
+  JoinTable,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
@@ -45,7 +47,7 @@ export class ClubEntity {
   createdAt: Date;
 
   @OneToMany(() => UserEntity, (user) => user.superadmin, {
-    onDelete: 'SET NULL',
+    onDelete: 'SET NULL'
   })
   kams: UserEntity[];
   

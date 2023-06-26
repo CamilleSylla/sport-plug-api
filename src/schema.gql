@@ -10,9 +10,9 @@ type Club {
   zip: String!
   email: String!
   phone: String!
+  logo: String!
   createdBy: String!
   updatedAt: DateTime!
-  logo: String!
   sport: Sport!
   createdAt: DateTime!
   teams: [Team!]!
@@ -100,6 +100,7 @@ type Mutation {
   createUser(user: CreateUserInput!): SignIn!
   createClub(club: CreateClubInput!, sportId: String!): Club!
   deleteClub(id: String!): Club!
+  updateClub(id: String!, club: UpdateClubInputs!): Club!
   createCompetition(competition: CreateCompetitionInputs!): Competition!
   createCategorie(categorie: CreateCategorieInputs!): Categorie!
   createSport(sport: CreateSportInputs!): Sport!
@@ -120,6 +121,16 @@ input CreateClubInput {
   zip: String!
   email: String!
   phone: String!
+}
+
+input UpdateClubInputs {
+  name: String
+  adress: String
+  city: String
+  zip: String
+  email: String
+  phone: String
+  logo: String
 }
 
 input CreateCompetitionInputs {

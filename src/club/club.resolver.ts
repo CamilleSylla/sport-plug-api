@@ -16,6 +16,9 @@ import { GqlAuthGuard } from 'src/auth/gql.guard';
 import { CurrentUser } from 'src/users/user.decorator';
 import { UserEntity } from 'src/users/users.entity';
 import { User } from 'src/users/dto/users.outputs';
+import UpdateClubOutputs from './dto/update-club.inputs';
+import UpdateClubInputs from './dto/update-club.inputs';
+import { ClubAdminGuard } from 'src/auth/club-admin.guard';
 
 @Resolver(() => Club)
 export class ClubResolver {
@@ -37,6 +40,15 @@ export class ClubResolver {
   async deleteClub(@Args('id', { type: () => String }) id: string) {
     //Add more checks
     return await this.clubService.delete(id);
+  }
+
+  @Mutation(() => Club)
+  @UseGuards(GqlAuthGuard, ClubAdminGuard)
+  async updateClub(
+    @Args('id', { type: () => String }) id: string,
+    @Args('club', { type: () => UpdateClubInputs }) club: UpdateClubInputs,
+  ) {
+    return await this.clubService.update(id, club);
   }
 
   @Query(() => [Club], { name: 'getAllClubs' })

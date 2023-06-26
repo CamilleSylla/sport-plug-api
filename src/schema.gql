@@ -83,26 +83,26 @@ type Query {
   signIn(email: String!, password: String!): SignIn!
   me: SignIn!
   findOne(id: String!): User!
-  getTeamByID(id: String!): Team!
+  getAllClubs: [Club!]!
+  getClubByID(id: String!): Club!
+  findByUserId: Club!
   competitions: [Competition!]!
   competitionsBySport(sportId: String!): [Competition!]!
   categories: [Categorie!]!
   sportById(id: String!): Sport!
   sports: [Sport!]!
-  getAllClubs: [Club!]!
-  getClubByID(id: String!): Club!
-  findByUserId: Club!
+  getTeamByID(id: String!): Team!
 }
 
 type Mutation {
   refreshToken(refreshToken: String!): SignIn!
   createUser(user: CreateUserInput!): SignIn!
-  createTeam(team: CreateTeamInputs!): Team!
+  createClub(club: CreateClubInput!, sportId: String!): Club!
+  deleteClub(id: String!): Club!
   createCompetition(competition: CreateCompetitionInputs!): Competition!
   createCategorie(categorie: CreateCategorieInputs!): Categorie!
   createSport(sport: CreateSportInputs!): Sport!
-  createClub(club: CreateClubInput!, sportId: String!): Club!
-  deleteClub(id: String!): Club!
+  createTeam(team: CreateTeamInputs!): Team!
 }
 
 input CreateUserInput {
@@ -112,11 +112,13 @@ input CreateUserInput {
   password: String!
 }
 
-input CreateTeamInputs {
+input CreateClubInput {
   name: String!
-  categorieId: String!
-  clubId: String!
-  competitionId: String!
+  adress: String!
+  city: String!
+  zip: String!
+  email: String!
+  phone: String!
 }
 
 input CreateCompetitionInputs {
@@ -134,11 +136,9 @@ input CreateSportInputs {
   name: String!
 }
 
-input CreateClubInput {
+input CreateTeamInputs {
   name: String!
-  adress: String!
-  city: String!
-  zip: String!
-  email: String!
-  phone: String!
+  categorieId: String!
+  clubId: String!
+  competitionId: String!
 }
